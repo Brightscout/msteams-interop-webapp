@@ -12,13 +12,13 @@ const baseApi = createApi({
     baseQuery: fetchBaseQuery({
 
         // TODO: change the Url later
-        baseUrl: `https://e3c2-2405-201-402b-6c0f-9136-66-e463-7ab5.in.ngrok.io/plugins/${PLUGIN_ID}/api/v1/teams`,
+        baseUrl: `https://e9ae-2405-201-402b-6c0f-7b88-9e95-c1e5-7203.in.ngrok.io/plugins/${PLUGIN_ID}/api/v1/teams`,
         prepareHeaders: (headers) => {
             // We can modify the headers here
             return headers;
         },
     }),
-    tagTypes: [],
+    tagTypes: ['ChannelConnect'],
     endpoints: (builder) => ({
         connectChannel: builder.mutation<void, ConnectChannelPayload>({
             query: (body) => ({
@@ -26,9 +26,17 @@ const baseApi = createApi({
                 method: 'POST',
                 body,
             }),
+            invalidatesTags: ['ChannelConnect'],
+        }),
+        getConnectedChannels: builder.query<ConnectedChannelData[], void>({
+            query: () => ({
+                url: '/channels',
+                method: 'GET',
+            }),
+            providesTags: ['ChannelConnect'],
         }),
     }),
 });
 
-export const {useConnectChannelMutation} = baseApi;
+export const {useConnectChannelMutation, useGetConnectedChannelsQuery} = baseApi;
 export default baseApi;

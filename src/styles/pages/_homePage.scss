@@ -19,7 +19,34 @@
 
     &__input-button {
         margin-top: 20px;
-        margin-left: 190px;
+        margin-left: 268px;
+    }
+
+    &__table {
+        width: 900px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.14), 0 0 2px rgba(0, 0, 0, 0.12);
+        border-radius: 4px;
+        margin-top: 70px;
+    }
+
+    &__table-loader {
+        margin-left: 140px;
+    }
+
+    &__table-title {
+        font-weight: 600;
+        font-size: 16px;
+        width: 178px;
+        height: 21px;
+        margin-left: 10px;
+        margin-bottom: 20px;
+        padding-top: 15px;
+    }
+
+    &__table-no-content {
+        font-weight: 700;
+        font-size: 20px;
+        margin-left: 300px;
     }
 }
 
