@@ -5,7 +5,7 @@ import {Provider} from 'react-redux';
 import {teamsTheme, Provider as FluentProvider} from '@fluentui/react-northstar';
 
 // TODO: Set path alias like @Reducers/..., @Components/..., @Hooks/...,
-import InputPanel from './containers/HomePage/inputPanel';
+import HomePage from './containers/HomePage';
 
 import {store} from './store';
 
@@ -19,7 +19,7 @@ ReactDOM.render(
             theme={teamsTheme}
         >
             {/* TODO: change this component later */}
-            <InputPanel/>
+            <HomePage/>
         </FluentProvider>
     </Provider>,
     document.getElementById('root'),

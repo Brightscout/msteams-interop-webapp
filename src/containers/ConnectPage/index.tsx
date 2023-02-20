@@ -12,7 +12,7 @@ const ConnectPage = () => {
             <a
 
                 // TODO: update the url from configuration page
-                href={`https://e3c2-2405-201-402b-6c0f-9136-66-e463-7ab5.in.ngrok.io/plugins/${PLUGIN_ID}/api/v1/teams${CONNECT_ACCOUNT_LINK}`}
+                href={`https://e9ae-2405-201-402b-6c0f-7b88-9e95-c1e5-7203.in.ngrok.io/plugins/${PLUGIN_ID}/api/v1/teams${CONNECT_ACCOUNT_LINK}`}
                 target='_blank'
                 className='msteams-connect__button'
                 rel='noreferrer'
