@@ -1,0 +1,53 @@
+.msteams-connect {
+    &__title {
+        position: absolute;
+        height: 28px;
+        left: 33px;
+        top: 50px;
+        font-weight: 600;
+        font-size: 30px;
+        line-height: 28px;
+    }
+
+    &__description {
+        position: absolute;
+        width: 746px;
+        height: 40px;
+        left: 32px;
+        top: 100px;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    &__button {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        font-weight: 600;
+        padding: 6px 18px;
+        gap: 10px;
+        position: absolute;
+        color: rgb(255, 255, 255);
+        width: 123px;
+        height: 31px;
+        left: 32px;
+        top: 165px;
+        box-shadow: 0 0.3px 0.9px rgba(0, 0, 0, 0.32), 0 1.6px 3.6px rgba(0, 0, 0, 0.28);
+        border-radius: 4px;
+        text-decoration: none;
+        background-color: rgb(91, 95, 199);
+    }
+
+    &__button:hover {
+        color: rgb(255, 255, 255);
+        background-color: rgb(68, 70, 145);
+        text-decoration: none;
+    }
+
+    &__home-button {
+        left: 175px;
+        top: 165px;
+    }
+}
