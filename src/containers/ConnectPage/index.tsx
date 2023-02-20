@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Button} from '@fluentui/react-northstar';
 
-import {CONNECT_ACCOUNT_LINK} from '../../constants';
+import {CONNECT_ACCOUNT_LINK, PLUGIN_ID} from '../../constants';
 
 const ConnectPage = () => {
     return (
@@ -12,7 +12,7 @@ const ConnectPage = () => {
             <a
 
                 // TODO: update the url from configuration page
-                href={`https://ac9d-2405-201-402b-6c0f-ffaa-c4c0-79ed-af96.in.ngrok.io/plugins/mattermost-plugin-msteams-interop/api/v1/teams${CONNECT_ACCOUNT_LINK}`}
+                href={`https://e3c2-2405-201-402b-6c0f-9136-66-e463-7ab5.in.ngrok.io/plugins/${PLUGIN_ID}/api/v1/teams${CONNECT_ACCOUNT_LINK}`}
                 target='_blank'
                 className='msteams-connect__button'
                 rel='noreferrer'
