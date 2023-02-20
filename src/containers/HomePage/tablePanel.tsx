@@ -1,13 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import {FetchBaseQueryError} from '@reduxjs/toolkit/dist/query';
 
-import {Button, Loader, Table} from '@fluentui/react-northstar';
+import {Button, Dialog, Loader, Table} from '@fluentui/react-northstar';
 
-import {useGetConnectedChannelsQuery} from '../../services';
+import ResultPanel from '../../components/resultPanel';
+import {GenericError} from '../../constants';
+import SVGIcons from '../../constants/icons';
+import {useDisconnectChannelMutation, useGetConnectedChannelsQuery} from '../../services';
 
 const TablePanel = () => {
     // States
     const [rowsData, setRowsData] = useState<ConnectedChannelTableData[]>([]);
+    const [showResultPanel, setShowResultPanel] = useState(false);
+    const [subsriptionDeletedId, setSubsriptionDeletedId] = useState('');
 
     // Table headers
     const header = {
@@ -16,11 +21,15 @@ const TablePanel = () => {
 
     // Services
     const {isLoading, data, isError, error, isFetching} = useGetConnectedChannelsQuery();
+    const [disconnectChannel, {
+        isError: disconnectChannelIsError,
+        isSuccess: disconnectChannelIsSuccess,
+        isLoading: disconnectChannelIsLoading,
+        error: disconnectChannelError}] = useDisconnectChannelMutation();
 
-    const handleDisconnectButton = (teamsChannel: string, mmChannel: string) => {
-        // TODO: complete this function
-        // eslint-disable-next-line no-alert
-        alert('clicked disconnect button ' + teamsChannel + ' ' + mmChannel);
+    const handleDisconnectButton = (subscriptionId: string) => {
+        setSubsriptionDeletedId(subscriptionId);
+        disconnectChannel({subscriptionId});
     };
 
     const getEmptyTableContent = () => {
@@ -58,18 +67,27 @@ const TablePanel = () => {
                     key: index,
                     items: [
                         {
-                            content: row.TeamsTeamName + '/' + row.TeamsChannelName,
+                            content: row.teamsTeamName + '/' + row.teamsChannelName,
                         },
                         {
-                            content: row.MMTeamName + '/' + row.MMChannelName,
+                            content: row.mmTeamName + '/' + row.mmChannelName,
                         },
                         {
                             content: (
-                                <Button
-                                    secondary={true}
-                                    content='Disconnect'
-                                    onClick={() => handleDisconnectButton(row.TeamsChannelName, row.MMChannelName)}
-                                />
+                                <>
+                                    <Button
+                                        secondary={true}
+                                        content='Disconnect'
+                                        onClick={() => handleDisconnectButton(row.subscriptionId)}
+                                        disabled={disconnectChannelIsLoading && subsriptionDeletedId === row.subscriptionId}
+                                    />
+                                    {disconnectChannelIsLoading && subsriptionDeletedId === row.subscriptionId && (
+                                        <Loader
+                                            inline={true}
+                                            className='msteams-home__disconnect-loader'
+                                        />
+                                    )}
+                                </>
                             ),
                         },
                     ],
@@ -79,7 +97,14 @@ const TablePanel = () => {
 
             setRowsData(rows);
         }
-    }, [data, isLoading, isError, isFetching]);
+    }, [data, isLoading, isError, isFetching, disconnectChannelIsLoading]);
+
+    useEffect(() => {
+        if (disconnectChannelIsSuccess || disconnectChannelIsError) {
+            setSubsriptionDeletedId('');
+            setShowResultPanel(true);
+        }
+    }, [disconnectChannelIsSuccess, disconnectChannelIsError]);
 
     return (
         <div className='msteams-home'>
@@ -90,6 +115,22 @@ const TablePanel = () => {
                     rows={rowsData}
                 />
             </div>
+            {showResultPanel && (
+                <Dialog
+                    content={
+                        <ResultPanel
+                            message={disconnectChannelIsSuccess ? 'Channel Disconnected Successfully' : ((disconnectChannelError as FetchBaseQueryError).data as APIError | undefined)?.message ?? GenericError}
+                            icon={disconnectChannelIsSuccess ? SVGIcons.success : SVGIcons.error}
+                        />
+                    }
+                    cancelButton='Close'
+                    onCancel={() => setShowResultPanel(false)}
+                    confirmButton={disconnectChannelIsError && 'Try Again'}
+                    onConfirm={() => setShowResultPanel(false)}
+                    backdrop={true}
+                    open={showResultPanel}
+                />
+            )}
         </div>
     );
 };

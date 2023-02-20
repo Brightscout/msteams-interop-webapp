@@ -3,6 +3,8 @@ import {FetchBaseQueryError} from '@reduxjs/toolkit/dist/query';
 
 import {Button, Dialog, Input, Loader} from '@fluentui/react-northstar';
 
+import ResultPanel from '../../components/resultPanel';
+import {GenericError} from '../../constants';
 import SVGIcons from '../../constants/icons';
 import {useConnectChannelMutation} from '../../services';
 
@@ -44,28 +46,6 @@ const InputPanel = () => {
             });
         }
     };
-
-    const successPanel = () => (
-        <div className='msteams-panel'>
-            <div className='msteams-panel__icon'>
-                {SVGIcons.success}
-            </div>
-            <div className='msteams-panel__text'>
-                {'Channel connected successfully'}
-            </div>
-        </div>
-    );
-
-    const errorPanel = () => (
-        <div className='msteams-panel'>
-            <div className='msteams-panel__icon'>
-                {SVGIcons.error}
-            </div>
-            <div className='msteams-panel__text'>
-                {((error as FetchBaseQueryError).data as APIError | undefined)?.message}
-            </div>
-        </div>
-    );
 
     useEffect(() => {
         if (isSuccess || isError) {
@@ -110,7 +90,12 @@ const InputPanel = () => {
                 )}
                 {showResultPanel && (
                     <Dialog
-                        content={isSuccess ? successPanel() : errorPanel()}
+                        content={
+                            <ResultPanel
+                                message={isSuccess ? 'Channel Connected Successfully' : ((error as FetchBaseQueryError).data as APIError | undefined)?.message ?? GenericError}
+                                icon={isSuccess ? SVGIcons.success : SVGIcons.error}
+                            />
+                        }
                         cancelButton='Close'
                         onCancel={() => setShowResultPanel(false)}
                         confirmButton={isError && 'Try Again'}
