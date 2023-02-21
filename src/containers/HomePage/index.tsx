@@ -1,7 +1,6 @@
 import React from 'react';
 
-import DisconnectButton from '../../components/disconnectButton';
-
+import DisconnectButton from './disconnectButton';
 import InputPanel from './inputPanel';
 import TablePanel from './tablePanel';
 
