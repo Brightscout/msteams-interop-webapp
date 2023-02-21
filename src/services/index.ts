@@ -41,6 +41,14 @@ const baseApi = createApi({
                 method: 'GET',
             }),
         }),
+        disconnectChannel: builder.mutation<void, DisconnectChannelPayload>({
+            query: (body) => ({
+                url: '/channels/disconnect',
+                method: 'POST',
+                body,
+            }),
+            invalidatesTags: ['ChannelConnect'],
+        }),
     }),
 });
 
@@ -49,5 +57,6 @@ export const {
     useGetConnectedChannelsQuery,
     useLazyGetConnectedChannelsQuery,
     useLazyDisconnectUserQuery,
+    useDisconnectChannelMutation,
 } = baseApi;
 export default baseApi;

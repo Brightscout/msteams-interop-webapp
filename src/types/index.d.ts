@@ -4,16 +4,16 @@ type APIError = {
 }
 
 type ConnectedChannelData = {
-    SubscriptionID: string,
-    ClientState: string,
-    TeamsTeamID: string,
-    TeamsTeamName: string,
-    TeamsChannelID: string,
-    TeamsChannelName: string,
-    MMTeamName: string,
-    MMChannelID: string,
-    MMChannelName: string,
-    MMUserID: string,
+    subscriptionId: string,
+    clientState: string,
+    teamsTeamId: string,
+    teamsTeamName: string,
+    teamsChannelID: string,
+    teamsChannelName: string,
+    mmTeamName: string,
+    mmChannelId: string,
+    mmChannelName: string,
+    mmUserID: string,
 }
 
 type ConnectedChannelTableData = {

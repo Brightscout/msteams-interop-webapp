@@ -1,0 +1,14 @@
+.msteams-panel {
+    display: flex;
+    flex-direction: column;
+
+    &__icon {
+        margin: auto;
+        margin-bottom: 10px;
+    }
+
+    &__text {
+        margin: auto;
+        margin-top: 10px;
+    }
+}

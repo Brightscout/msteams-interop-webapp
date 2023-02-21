@@ -49,19 +49,8 @@
         font-size: 20px;
         margin-left: 340px;
     }
-}
 
-.msteams-panel {
-    display: flex;
-    flex-direction: column;
-
-    &__icon {
-        margin: auto;
-        margin-bottom: 10px;
-    }
-
-    &__text {
-        margin: auto;
-        margin-top: 10px;
+    &__disconnect-loader {
+        margin-left: 15px;
     }
 }
