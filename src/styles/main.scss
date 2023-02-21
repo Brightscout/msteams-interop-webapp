@@ -1,5 +1,8 @@
 @import 'abstracts/utils';
 @import 'abstracts/variables';
 
+@import 'components/disconnectButton';
+@import 'components/loadingPage';
+
 @import 'pages/connectPage';
 @import 'pages/homePage';

@@ -1,10 +1,30 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 import {Button} from '@fluentui/react-northstar';
 
+import LoadingPage from '../../components/loadingPage';
 import {CONNECT_ACCOUNT_LINK, PLUGIN_ID} from '../../constants';
+import {useReduxDispatch} from '../../hooks';
+import {setConnected} from '../../reducers/connectedState';
+import {useLazyGetConnectedChannelsQuery} from '../../services';
 
 const ConnectPage = () => {
+    const dispatch = useReduxDispatch();
+
+    const [getConnectedChannels, {isLoading, isSuccess, isFetching}] = useLazyGetConnectedChannelsQuery();
+
+    useEffect(() => {
+        if (isSuccess && !(isLoading || isFetching)) {
+            dispatch(setConnected(true));
+        }
+    }, [isSuccess, isLoading, isFetching]);
+
+    if (isLoading || isFetching) {
+        return (
+            <LoadingPage/>
+        );
+    }
+
     return (
         <div className='msteams-connect'>
             <div className='msteams-connect__title'>{'Connect your account'}</div>
@@ -23,6 +43,7 @@ const ConnectPage = () => {
                 primary={true}
                 content='Already connected? Go to home'
                 className='msteams-connect__home-button'
+                onClick={() => getConnectedChannels()}
             />
         </div>
     );

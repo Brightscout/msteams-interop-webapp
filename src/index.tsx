@@ -5,7 +5,7 @@ import {Provider} from 'react-redux';
 import {teamsTheme, Provider as FluentProvider} from '@fluentui/react-northstar';
 
 // TODO: Set path alias like @Reducers/..., @Components/..., @Hooks/...,
-import HomePage from './containers/HomePage';
+import PrivateRoute from './routes/privateRoute';
 
 import {store} from './store';
 
@@ -18,8 +18,7 @@ ReactDOM.render(
         <FluentProvider
             theme={teamsTheme}
         >
-            {/* TODO: change this component later */}
-            <HomePage/>
+            <PrivateRoute/>
         </FluentProvider>
     </Provider>,
     document.getElementById('root'),
