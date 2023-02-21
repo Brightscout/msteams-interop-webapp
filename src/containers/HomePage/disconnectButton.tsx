@@ -7,8 +7,6 @@ import {useLazyDisconnectUserQuery} from '../../services';
 import {useReduxDispatch} from '../../hooks';
 import {setConnected} from '../../reducers/connectedState';
 
-import './styles.scss';
-
 const DisconnectButton = () => {
     const dispatch = useReduxDispatch();
 
