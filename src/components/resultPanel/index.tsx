@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './styles.scss';
+
 type ResultPanelProps = {
     message: string;
     icon?: JSX.Element;
