@@ -15,11 +15,19 @@
 
     &__input-component {
         margin-right: 15px;
+
+        .ui-box {
+            width: 345px;
+        }
+
+        .ui-icon {
+            margin-left: 325px;
+        }
     }
 
     &__input-button {
         margin-top: 20px;
-        margin-left: 268px;
+        margin-left: 20px;
     }
 
     &__table {
