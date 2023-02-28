@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 import {Button} from '@fluentui/react-northstar';
 
@@ -13,12 +13,14 @@ const DisconnectButton = () => {
     // Services
     const [disconnectUser, {isSuccess}] = useLazyDisconnectUserQuery();
 
-    if (isSuccess) {
-        dispatch(setConnected(false));
-    }
+    useEffect(() => {
+        if (isSuccess) {
+            dispatch(setConnected(false));
+        }
+    }, [isSuccess]);
 
     return (
-        <div className='msteams-disconnect'>
+        <div className='msteams-home__disconnect-button'>
             <Button
                 content='Disconnect'
                 onClick={() => disconnectUser()}

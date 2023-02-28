@@ -17,6 +17,7 @@ const baseApi = createApi({
             // We can modify the headers here
             return headers;
         },
+        timeout: 30000,
     }),
     tagTypes: ['ChannelConnect'],
     endpoints: (builder) => ({

@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {FetchBaseQueryError} from '@reduxjs/toolkit/dist/query';
 
-import {Button, Dialog, Input, Loader} from '@fluentui/react-northstar';
+import {Button, Dialog, Input} from '@fluentui/react-northstar';
 
+import LoadingPage from '../../components/loadingPage';
 import ResultPanel from '../../components/resultPanel';
 import {GenericError} from '../../constants';
 import SVGIcons from '../../constants/icons';
@@ -64,7 +65,6 @@ const InputPanel = () => {
                     required={true}
                     error={teamsChannelUrlError}
                     onChange={handleTeamsChannelUrlChange}
-                    disabled={isLoading}
                 />
                 <Input
                     placeholder='URL'
@@ -73,19 +73,18 @@ const InputPanel = () => {
                     required={true}
                     error={mattermostChannelUrlError}
                     onChange={handleMattermostChannelUrlChange}
-                    disabled={isLoading}
                 />
                 <Button
                     primary={true}
                     content='Connect a channel'
                     className='msteams-home__input-button'
                     onClick={handleChannelConnect}
-                    disabled={isLoading}
                 />
                 {isLoading && (
-                    <Loader
+                    <LoadingPage
                         label='Connecting...'
                         inline={true}
+                        className='msteams-loading-page__transparent-loader'
                     />
                 )}
                 {showResultPanel && (

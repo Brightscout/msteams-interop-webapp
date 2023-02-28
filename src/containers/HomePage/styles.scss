@@ -15,11 +15,19 @@
 
     &__input-component {
         margin-right: 15px;
+
+        .ui-box {
+            width: 345px;
+        }
+
+        .ui-icon {
+            margin-left: 325px;
+        }
     }
 
     &__input-button {
         margin-top: 20px;
-        margin-left: 268px;
+        margin-left: 20px;
     }
 
     &__table {
@@ -52,5 +60,21 @@
 
     &__disconnect-loader {
         margin-left: 15px;
+    }
+
+    &__disconnect-button {
+        display: flex;
+        justify-content: end;
+        padding-top: 30px;
+        padding-right: 30px;
+
+        .ui-button {
+            border-color: rgb(255, 148, 148);
+        }
+
+        .ui-button:hover {
+            background-color: rgb(255, 255, 255);
+            border-color: rgb(190, 0, 0);
+        }
     }
 }

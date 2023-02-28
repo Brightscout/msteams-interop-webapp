@@ -3,6 +3,7 @@ import {FetchBaseQueryError} from '@reduxjs/toolkit/dist/query';
 
 import {Button, Dialog, Loader, Table} from '@fluentui/react-northstar';
 
+import LoadingPage from '../../components/loadingPage';
 import ResultPanel from '../../components/resultPanel';
 import {GenericError} from '../../constants';
 import SVGIcons from '../../constants/icons';
@@ -12,7 +13,6 @@ const TablePanel = () => {
     // States
     const [rowsData, setRowsData] = useState<ConnectedChannelTableData[]>([]);
     const [showResultPanel, setShowResultPanel] = useState(false);
-    const [subsriptionDeletedId, setSubsriptionDeletedId] = useState('');
 
     // Table headers
     const header = {
@@ -28,7 +28,6 @@ const TablePanel = () => {
         error: disconnectChannelError}] = useDisconnectChannelMutation();
 
     const handleDisconnectButton = (subscriptionId: string) => {
-        setSubsriptionDeletedId(subscriptionId);
         disconnectChannel({subscriptionId});
     };
 
@@ -74,20 +73,11 @@ const TablePanel = () => {
                         },
                         {
                             content: (
-                                <>
-                                    <Button
-                                        secondary={true}
-                                        content='Disconnect'
-                                        onClick={() => handleDisconnectButton(row.subscriptionId)}
-                                        disabled={disconnectChannelIsLoading && subsriptionDeletedId === row.subscriptionId}
-                                    />
-                                    {disconnectChannelIsLoading && subsriptionDeletedId === row.subscriptionId && (
-                                        <Loader
-                                            inline={true}
-                                            className='msteams-home__disconnect-loader'
-                                        />
-                                    )}
-                                </>
+                                <Button
+                                    secondary={true}
+                                    content='Disconnect'
+                                    onClick={() => handleDisconnectButton(row.subscriptionId)}
+                                />
                             ),
                         },
                     ],
@@ -97,11 +87,10 @@ const TablePanel = () => {
 
             setRowsData(rows);
         }
-    }, [data, isLoading, isError, isFetching, disconnectChannelIsLoading]);
+    }, [data, isLoading, isError, isFetching]);
 
     useEffect(() => {
         if (disconnectChannelIsSuccess || disconnectChannelIsError) {
-            setSubsriptionDeletedId('');
             setShowResultPanel(true);
         }
     }, [disconnectChannelIsSuccess, disconnectChannelIsError]);
@@ -129,6 +118,13 @@ const TablePanel = () => {
                     onConfirm={() => setShowResultPanel(false)}
                     backdrop={true}
                     open={showResultPanel}
+                />
+            )}
+            {disconnectChannelIsLoading && (
+                <LoadingPage
+                    label='Disconnecting...'
+                    inline={true}
+                    className='msteams-loading-page__transparent-loader'
                 />
             )}
         </div>

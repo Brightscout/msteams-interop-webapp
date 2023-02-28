@@ -8,6 +8,8 @@ import {useReduxDispatch} from '../../hooks';
 import {setConnected} from '../../reducers/connectedState';
 import {useLazyGetConnectedChannelsQuery} from '../../services';
 
+import './styles.scss';
+
 const ConnectPage = () => {
     const dispatch = useReduxDispatch();
 
@@ -21,7 +23,10 @@ const ConnectPage = () => {
 
     if (isLoading || isFetching) {
         return (
-            <LoadingPage/>
+            <LoadingPage
+                label='Loading...'
+                inline={true}
+            />
         );
     }
 
