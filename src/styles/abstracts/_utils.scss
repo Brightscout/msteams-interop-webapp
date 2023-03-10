@@ -18,14 +18,14 @@
 @each $dir in $margin-direction {
     @each $margin in $margins {
         .margin-#{$dir}-#{$margin} {
-            margin-#{$dir}: #{$margin}px;
+            margin-#{$dir}: #{$margin}px !important;
         }
     } 
 }
 
 @each $margin in $margins {
     .margin-#{$margin} {
-        margin: #{$margin}px;
+        margin: #{$margin}px !important;
     }
 } 
 
