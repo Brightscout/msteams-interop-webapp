@@ -2,6 +2,8 @@ const path = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const webpack = require('webpack');
+
 require('dotenv').config();
 
 module.exports = {
@@ -66,6 +68,11 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, 'public/index.html'),
             filename: 'teams-app.html',
+        }),
+        new webpack.DefinePlugin({
+            'process.env': {
+                PLUGIN_ID: JSON.stringify(process.env.PLUGIN_ID),
+            },
         }),
     ],
     devServer: {
