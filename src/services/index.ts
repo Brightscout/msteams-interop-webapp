@@ -1,6 +1,6 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 
-import {PLUGIN_ID} from '../constants';
+import {ENV_VARIABLES} from '../constants';
 
 /**
  * Base API service to be used across the application.
@@ -12,7 +12,7 @@ const baseApi = createApi({
     baseQuery: fetchBaseQuery({
 
         // TODO: change the Url later
-        baseUrl: `https://e3c2-2405-201-402b-6c0f-9136-66-e463-7ab5.in.ngrok.io/plugins/${PLUGIN_ID}/api/v1/teams`,
+        baseUrl: `https://e3c2-2405-201-402b-6c0f-9136-66-e463-7ab5.in.ngrok.io/plugins/${ENV_VARIABLES.PLUGIN_ID}/api/v1/teams`,
         prepareHeaders: (headers) => {
             // We can modify the headers here
             return headers;

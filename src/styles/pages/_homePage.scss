@@ -1,39 +1,8 @@
 .msteams-home {
-    margin-left: 150px;
-
     &__title {
-        margin-top: 25px;
         height: 28px;
         font-weight: 600;
         font-size: 30px;
         line-height: 28px;
-    }
-
-    &__input-panel {
-        margin-top: 35px;
-    }
-
-    &__input-component {
-        margin-right: 15px;
-    }
-
-    &__input-button {
-        margin-top: 20px;
-        margin-left: 190px;
-    }
-}
-
-.msteams-panel {
-    display: flex;
-    flex-direction: column;
-
-    &__icon {
-        margin: auto;
-        margin-bottom: 10px;
-    }
-
-    &__text {
-        margin: auto;
-        margin-top: 10px;
     }
 }

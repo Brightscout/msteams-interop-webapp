@@ -1,0 +1,34 @@
+@import './variables';
+
+// Display
+@each $display in $display-styles {
+    .d-#{$display} {
+        display: $display !important;
+    }
+}
+
+// flex direction
+@each $dir in $flex-direction {
+    .flex-#{$dir} {
+        flex-direction: $dir !important;
+    }
+}
+
+// margins
+@each $dir in $margin-direction {
+    @each $margin in $margins {
+        .margin-#{$dir}-#{$margin} {
+            margin-#{$dir}: #{$margin}px;
+        }
+    } 
+}
+
+@each $margin in $margins {
+    .margin-#{$margin} {
+        margin: #{$margin}px;
+    }
+} 
+
+.margin-auto {
+    margin: auto;
+}

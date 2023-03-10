@@ -78,22 +78,22 @@ const InputPanel = () => {
     };
 
     const successPanel = () => (
-        <div className='msteams-panel'>
-            <div className='msteams-panel__icon'>
+        <div className='msteams-panel d-flex flex-column'>
+            <div className='margin-auto margin-bottom-10'>
                 {SVGIcons.success}
             </div>
-            <div className='msteams-panel__text'>
+            <div className='margin-auto margin-top-10'>
                 {'Channel connected successfully'}
             </div>
         </div>
     );
 
     const errorPanel = () => (
-        <div className='msteams-panel'>
-            <div className='msteams-panel__icon'>
+        <div className='msteams-panel d-flex flex-column'>
+            <div className='margin-auto margin-bottom-10'>
                 {SVGIcons.error}
             </div>
-            <div className='msteams-panel__text'>
+            <div className='margin-auto margin-top-10'>
                 {((error as FetchBaseQueryError).data as APIError | undefined)?.message}
             </div>
         </div>
@@ -106,13 +106,13 @@ const InputPanel = () => {
     }, [isSuccess, isError]);
 
     return (
-        <div className='msteams-home'>
-            <div className='msteams-home__title'>{'Mattermost Connect'}</div>
-            <div className='msteams-home__input-panel'>
+        <div className='msteams-home margin-left-150'>
+            <div className='msteams-home__title margin-top-25'>{'Mattermost Connect'}</div>
+            <div className='margin-top-35'>
                 <Input
                     placeholder={connectForm.teamsChannelUrl.placeholder}
                     label={connectForm.teamsChannelUrl.label}
-                    className='msteams-home__input-component'
+                    className='margin-right-15'
                     required={connectForm.teamsChannelUrl.isRequired}
                     error={connectForm.teamsChannelUrl.error as boolean}
                     onChange={handleTeamsChannelUrlChange}
@@ -121,7 +121,7 @@ const InputPanel = () => {
                 <Input
                     placeholder={connectForm.mattermostChannelURL.placeholder}
                     label={connectForm.mattermostChannelURL.label}
-                    className='msteams-home__input-component'
+                    className='margin-right-15'
                     required={connectForm.mattermostChannelURL.isRequired}
                     error={connectForm.mattermostChannelURL.error as boolean}
                     onChange={handleMattermostChannelUrlChange}
@@ -130,7 +130,7 @@ const InputPanel = () => {
                 <Button
                     primary={true}
                     content='Connect a channel'
-                    className='msteams-home__input-button'
+                    className='margin-top-20 margin-left-190'
                     onClick={handleChannelConnect}
                     disabled={isLoading}
                 />
