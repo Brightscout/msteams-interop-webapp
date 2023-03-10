@@ -45,7 +45,7 @@ const InputPanel = () => {
             setConnectForm((formData) => ({
                 ...formData,
                 teamsChannelUrl: {
-                    ...connectForm.teamsChannelUrl,
+                    ...formData.teamsChannelUrl,
                     error: true,
                 },
             }));
@@ -55,7 +55,7 @@ const InputPanel = () => {
             setConnectForm((formData) => ({
                 ...formData,
                 mattermostChannelURL: {
-                    ...connectForm.mattermostChannelURL,
+                    ...formData.mattermostChannelURL,
                     error: true,
                 },
             }));
