@@ -2,37 +2,69 @@ import React, {useState} from 'react';
 
 import {Button, Input} from '@fluentui/react-northstar';
 
-const InputPanel = () => {
-    const [teamsChannelUrl, setTeamsChannelUrl] = useState('');
-    const [mattermostChannelUrl, setMattermostChannelUrl] = useState('');
+import {ConnectFormFields} from '../../types';
 
-    // Error states
-    const [teamsChannelUrlError, setTeamsChannelUrlError] = useState(false);
-    const [mattermostChannelUrlError, setMattermostChannelUrlError] = useState(false);
+const InputPanel = () => {
+    const connectFormData: Record<ConnectFormFields, FormConfig> = {
+        [ConnectFormFields.teamsChannelUrl]: {
+            label: 'Teams channel URL',
+            placeholder: 'URL',
+            isRequired: true,
+        },
+        [ConnectFormFields.mattermostChannelURL]: {
+            label: 'Mattermost channel URL',
+            placeholder: 'URL',
+            isRequired: true,
+        },
+    };
+
+    const [connectForm, setConnectForm] = useState<Record<ConnectFormFields, FormConfig>>({...connectFormData});
 
     const handleTeamsChannelUrlChange = (e: React.SyntheticEvent) => {
-        setTeamsChannelUrlError(false);
-        setTeamsChannelUrl((e.target as HTMLInputElement).value);
+        setConnectForm({
+            ...connectForm,
+            teamsChannelUrl: {
+                ...connectForm.teamsChannelUrl,
+                error: false,
+                value: (e.target as HTMLInputElement).value,
+            }});
     };
 
     const handleMattermostChannelUrlChange = (e: React.SyntheticEvent) => {
-        setMattermostChannelUrlError(false);
-        setMattermostChannelUrl((e.target as HTMLInputElement).value);
+        setConnectForm({
+            ...connectForm,
+            mattermostChannelURL: {
+                ...connectForm.mattermostChannelURL,
+                error: false,
+                value: (e.target as HTMLInputElement).value,
+            }});
     };
 
     const handleChannelConnect = () => {
-        if (!teamsChannelUrl) {
-            setTeamsChannelUrlError(true);
+        if (!connectForm.teamsChannelUrl.value) {
+            setConnectForm((formData) => ({
+                ...formData,
+                teamsChannelUrl: {
+                    ...connectForm.teamsChannelUrl,
+                    error: true,
+                },
+            }));
         }
 
-        if (!mattermostChannelUrl) {
-            setMattermostChannelUrlError(true);
+        if (!connectForm.mattermostChannelURL.value) {
+            setConnectForm((formData) => ({
+                ...formData,
+                mattermostChannelURL: {
+                    ...connectForm.mattermostChannelURL,
+                    error: true,
+                },
+            }));
         }
 
-        if (teamsChannelUrl && mattermostChannelUrl) {
+        if (connectForm.teamsChannelUrl.value && connectForm.mattermostChannelURL.value) {
             // TODO: remove later
             // eslint-disable-next-line no-alert
-            alert(teamsChannelUrl + ' ' + mattermostChannelUrl);
+            alert(connectForm.teamsChannelUrl.value + ' ' + connectForm.mattermostChannelURL.value);
         }
     };
 
@@ -41,19 +73,19 @@ const InputPanel = () => {
             <div className='msteams-home__title'>{'Mattermost Connect'}</div>
             <div className='msteams-home__input-panel'>
                 <Input
-                    placeholder='URL'
-                    label='Teams channel URL'
+                    placeholder={connectForm.teamsChannelUrl.placeholder}
+                    label={connectForm.teamsChannelUrl.label}
                     className='msteams-home__input-component'
-                    required={true}
-                    error={teamsChannelUrlError}
+                    required={connectForm.teamsChannelUrl.isRequired}
+                    error={connectForm.teamsChannelUrl.error as boolean}
                     onChange={handleTeamsChannelUrlChange}
                 />
                 <Input
-                    placeholder='URL'
-                    label='Mattermost channel URL'
+                    placeholder={connectForm.mattermostChannelURL.placeholder}
+                    label={connectForm.mattermostChannelURL.label}
                     className='msteams-home__input-component'
-                    required={true}
-                    error={mattermostChannelUrlError}
+                    required={connectForm.mattermostChannelURL.isRequired}
+                    error={connectForm.mattermostChannelURL.error as boolean}
                     onChange={handleMattermostChannelUrlChange}
                 />
                 <Button
