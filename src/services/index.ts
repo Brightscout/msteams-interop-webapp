@@ -2,6 +2,8 @@ import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 
 import {PLUGIN_ID} from '../constants';
 
+import utils from '../utils';
+
 /**
  * Base API service to be used across the application.
  * Endpoints can be injected using the .injectEndpoints method.
@@ -10,9 +12,7 @@ import {PLUGIN_ID} from '../constants';
 const baseApi = createApi({
     reducerPath: 'baseApiReducer',
     baseQuery: fetchBaseQuery({
-
-        // TODO: change the Url later
-        baseUrl: `https://e9ae-2405-201-402b-6c0f-7b88-9e95-c1e5-7203.in.ngrok.io/plugins/${PLUGIN_ID}/api/v1/teams`,
+        baseUrl: `${utils.getBaseUrl()}/plugins/${PLUGIN_ID}/api/v1/teams`,
         prepareHeaders: (headers) => {
             // We can modify the headers here
             return headers;
