@@ -2,10 +2,10 @@ import React, {useState} from 'react';
 
 import {Button, Input} from '@fluentui/react-northstar';
 
-import {ConnectFormFields} from '../../types';
+import {ConnectFormFields, ConnectFormFieldsType} from '../../types';
 
 const InputPanel = () => {
-    const connectFormData: Record<ConnectFormFields, FormConfig> = {
+    const connectFormData: Record<ConnectFormFieldsType, FormConfig> = {
         [ConnectFormFields.teamsChannelUrl]: {
             label: 'Teams channel URL',
             placeholder: 'URL',
@@ -18,7 +18,7 @@ const InputPanel = () => {
         },
     };
 
-    const [connectForm, setConnectForm] = useState<Record<ConnectFormFields, FormConfig>>({...connectFormData});
+    const [connectForm, setConnectForm] = useState<Record<ConnectFormFieldsType, FormConfig>>({...connectFormData});
 
     const handleTeamsChannelUrlChange = (e: React.SyntheticEvent) => {
         setConnectForm({
