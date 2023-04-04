@@ -6,11 +6,11 @@ import {Button, Dialog, Input, Loader} from '@fluentui/react-northstar';
 import SVGIcons from '../../constants/icons';
 import {useConnectChannelMutation} from '../../services';
 
-import {APIError, ConnectFormFields} from '../../types';
+import {APIError, ConnectFormFields, ConnectFormFieldsType} from '../../types';
 
 const InputPanel = () => {
     const [showResultPanel, setShowResultPanel] = useState(false);
-    const connectFormData: Record<ConnectFormFields, FormConfig> = {
+    const connectFormData: Record<ConnectFormFieldsType, FormConfig> = {
         [ConnectFormFields.teamsChannelUrl]: {
             label: 'Teams channel URL',
             placeholder: 'URL',
@@ -23,7 +23,7 @@ const InputPanel = () => {
         },
     };
 
-    const [connectForm, setConnectForm] = useState<Record<ConnectFormFields, FormConfig>>({...connectFormData});
+    const [connectForm, setConnectForm] = useState<Record<ConnectFormFieldsType, FormConfig>>({...connectFormData});
 
     // Services
     const [connectChannel, {isError, isSuccess, isLoading, error}] = useConnectChannelMutation();
