@@ -3,6 +3,8 @@ import {FetchBaseQueryError} from '@reduxjs/toolkit/dist/query';
 
 import {Button, Loader, Table} from '@fluentui/react-northstar';
 
+import {APIError, ConnectedChannelTableData} from '../../types';
+
 import {useGetConnectedChannelsQuery} from '../../services';
 
 const TablePanel = () => {
@@ -32,7 +34,7 @@ const TablePanel = () => {
             return (
                 <Loader
                     inline={true}
-                    className='msteams-home__table-loader'
+                    className='margin-left-140'
                 />
             );
         }
@@ -45,7 +47,7 @@ const TablePanel = () => {
             setRowsData([{
                 key: 0,
                 items: [
-                    {content: <div className='msteams-home__table-no-content'>{getEmptyTableContent()}</div>},
+                    {content: <div className='msteams-home__table-no-content margin-left-300'>{getEmptyTableContent()}</div>},
                 ],
             }]);
             return;
@@ -83,8 +85,8 @@ const TablePanel = () => {
 
     return (
         <div className='msteams-home'>
-            <div className='msteams-home__table'>
-                <div className='msteams-home__table-title'>{'Connected Channel List'}</div>
+            <div className='msteams-home__table margin-top-70'>
+                <div className='msteams-home__table-title margin-left-10 margin-bottom-20'>{'Connected Channel List'}</div>
                 <Table
                     header={header}
                     rows={rowsData}
