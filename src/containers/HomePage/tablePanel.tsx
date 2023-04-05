@@ -50,10 +50,7 @@ const TablePanel = () => {
                     {content: <div className='msteams-home__table-no-content margin-left-300'>{getEmptyTableContent()}</div>},
                 ],
             }]);
-            return;
-        }
-
-        if (data) {
+        } else if (data) {
             const rows: ConnectedChannelTableData[] = [];
             data.map((row, index) => {
                 rows.push({
