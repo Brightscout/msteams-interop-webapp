@@ -1,37 +1,15 @@
 .msteams-home {
-    margin-left: 150px;
-
     &__title {
-        margin-top: 25px;
         height: 28px;
         font-weight: 600;
         font-size: 30px;
         line-height: 28px;
     }
 
-    &__input-panel {
-        margin-top: 35px;
-    }
-
-    &__input-component {
-        margin-right: 15px;
-    }
-
-    &__input-button {
-        margin-top: 20px;
-        margin-left: 268px;
-    }
-
     &__table {
         width: 900px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.14), 0 0 2px rgba(0, 0, 0, 0.12);
         border-radius: 4px;
-        margin-top: 70px;
-        margin-bottom: 50px;
-    }
-
-    &__table-loader {
-        margin-left: 140px;
     }
 
     &__table-title {
@@ -39,29 +17,11 @@
         font-size: 16px;
         width: 178px;
         height: 21px;
-        margin-left: 10px;
-        margin-bottom: 20px;
         padding-top: 15px;
     }
 
     &__table-no-content {
         font-weight: 700;
         font-size: 20px;
-        margin-left: 340px;
-    }
-}
-
-.msteams-panel {
-    display: flex;
-    flex-direction: column;
-
-    &__icon {
-        margin: auto;
-        margin-bottom: 10px;
-    }
-
-    &__text {
-        margin: auto;
-        margin-top: 10px;
     }
 }

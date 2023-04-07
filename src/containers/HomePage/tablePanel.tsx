@@ -3,6 +3,8 @@ import {FetchBaseQueryError} from '@reduxjs/toolkit/dist/query';
 
 import {Button, Loader, Table} from '@fluentui/react-northstar';
 
+import {APIError, ConnectedChannelTableData} from '../../types';
+
 import {useGetConnectedChannelsQuery} from '../../services';
 
 const TablePanel = () => {
@@ -15,7 +17,7 @@ const TablePanel = () => {
     };
 
     // Services
-    const {isLoading, data, isError, error, isFetching} = useGetConnectedChannelsQuery();
+    const {data, isError, error, isFetching} = useGetConnectedChannelsQuery();
 
     const handleDisconnectButton = (teamsChannel: string, mmChannel: string) => {
         // TODO: complete this function
@@ -28,11 +30,11 @@ const TablePanel = () => {
             return ((error as FetchBaseQueryError).data as APIError | undefined)?.message;
         }
 
-        if (isLoading || isFetching) {
+        if (isFetching) {
             return (
                 <Loader
                     inline={true}
-                    className='msteams-home__table-loader'
+                    className='margin-left-140'
                 />
             );
         }
@@ -41,17 +43,14 @@ const TablePanel = () => {
     };
 
     useEffect(() => {
-        if (isError || isLoading || isFetching || !data?.length) {
+        if (isError || isFetching || !data?.length) {
             setRowsData([{
                 key: 0,
                 items: [
-                    {content: <div className='msteams-home__table-no-content'>{getEmptyTableContent()}</div>},
+                    {content: <div className='msteams-home__table-no-content margin-left-300'>{getEmptyTableContent()}</div>},
                 ],
             }]);
-            return;
-        }
-
-        if (data) {
+        } else if (data) {
             const rows: ConnectedChannelTableData[] = [];
             data.map((row, index) => {
                 rows.push({
@@ -79,12 +78,12 @@ const TablePanel = () => {
 
             setRowsData(rows);
         }
-    }, [data, isLoading, isError, isFetching]);
+    }, [data, isError, isFetching]);
 
     return (
         <div className='msteams-home'>
-            <div className='msteams-home__table'>
-                <div className='msteams-home__table-title'>{'Connected Channel List'}</div>
+            <div className='msteams-home__table margin-top-70'>
+                <div className='msteams-home__table-title margin-left-10 margin-bottom-20'>{'Connected Channel List'}</div>
                 <Table
                     header={header}
                     rows={rowsData}

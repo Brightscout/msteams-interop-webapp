@@ -2,8 +2,8 @@ import React, {useEffect} from 'react';
 
 import {Button} from '@fluentui/react-northstar';
 
+import {PLUGIN_API, ENV_VARIABLES} from '../../constants';
 import LoadingPage from '../../components/loadingPage';
-import {CONNECT_ACCOUNT_LINK, PLUGIN_ID} from '../../constants';
 import {useReduxDispatch} from '../../hooks';
 import {setConnected} from '../../reducers/connectedState';
 import {useLazyGetConnectedChannelsQuery} from '../../services';
@@ -32,9 +32,9 @@ const ConnectPage = () => {
             <a
 
                 // TODO: update the url from configuration page
-                href={`https://e9ae-2405-201-402b-6c0f-7b88-9e95-c1e5-7203.in.ngrok.io/plugins/${PLUGIN_ID}/api/v1/teams${CONNECT_ACCOUNT_LINK}`}
+                href={`https://e3c2-2405-201-402b-6c0f-9136-66-e463-7ab5.in.ngrok.io/plugins/${ENV_VARIABLES.PLUGIN_ID}/api/v1/teams${PLUGIN_API.CONNECT_ACCOUNT_LINK}`}
                 target='_blank'
-                className='msteams-connect__button'
+                className='msteams-connect__button d-flex flex-row'
                 rel='noreferrer'
             >
                 {'Connect Now'}
@@ -42,7 +42,7 @@ const ConnectPage = () => {
             <Button
                 primary={true}
                 content='Already connected? Go to home'
-                className='msteams-connect__home-button'
+                className='margin-left-25'
                 onClick={() => getConnectedChannels()}
             />
         </div>

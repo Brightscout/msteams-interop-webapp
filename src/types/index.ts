@@ -1,9 +1,16 @@
-type APIError = {
+export type APIError = {
     id: string,
     message: string,
 }
 
-type ConnectedChannelData = {
+export const ConnectFormFields = {
+    teamsChannelUrl: 'teamsChannelUrl',
+    mattermostChannelURL: 'mattermostChannelURL',
+};
+
+export type ConnectFormFieldsType = typeof ConnectFormFields[keyof typeof ConnectFormFields]
+
+export type ConnectedChannelData = {
     SubscriptionID: string,
     ClientState: string,
     TeamsTeamID: string,
@@ -16,7 +23,7 @@ type ConnectedChannelData = {
     MMUserID: string,
 }
 
-type ConnectedChannelTableData = {
+export type ConnectedChannelTableData = {
     key: number;
     items: ({content: string | JSX.Element})[];
 }
