@@ -37,8 +37,19 @@ const baseApi = createApi({
             }),
             providesTags: ['ChannelConnect'],
         }),
+        disconnectUser: builder.query<void, void>({
+            query: () => ({
+                url: '/oauth2/disconnect',
+                method: 'GET',
+            }),
+        }),
     }),
 });
 
-export const {useConnectChannelMutation, useGetConnectedChannelsQuery} = baseApi;
+export const {
+    useConnectChannelMutation,
+    useGetConnectedChannelsQuery,
+    useLazyGetConnectedChannelsQuery,
+    useLazyDisconnectUserQuery,
+} = baseApi;
 export default baseApi;
