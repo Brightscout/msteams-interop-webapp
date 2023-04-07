@@ -15,12 +15,12 @@ export type ConnectedChannelData = {
     clientState: string,
     teamsTeamId: string,
     teamsTeamName: string,
-    teamsChannelID: string,
+    teamsChannelId: string,
     teamsChannelName: string,
     mmTeamName: string,
     mmChannelId: string,
     mmChannelName: string,
-    mmUserID: string,
+    mmUserId: string,
 }
 
 export type ConnectedChannelTableData = {
