@@ -17,7 +17,7 @@ const TablePanel = () => {
     };
 
     // Services
-    const {isLoading, data, isError, error, isFetching} = useGetConnectedChannelsQuery();
+    const {data, isError, error, isFetching} = useGetConnectedChannelsQuery();
 
     const handleDisconnectButton = (teamsChannel: string, mmChannel: string) => {
         // TODO: complete this function
@@ -30,7 +30,7 @@ const TablePanel = () => {
             return ((error as FetchBaseQueryError).data as APIError | undefined)?.message;
         }
 
-        if (isLoading || isFetching) {
+        if (isFetching) {
             return (
                 <Loader
                     inline={true}
@@ -43,7 +43,7 @@ const TablePanel = () => {
     };
 
     useEffect(() => {
-        if (isError || isLoading || isFetching || !data?.length) {
+        if (isError || isFetching || !data?.length) {
             setRowsData([{
                 key: 0,
                 items: [
@@ -78,7 +78,7 @@ const TablePanel = () => {
 
             setRowsData(rows);
         }
-    }, [data, isLoading, isError, isFetching]);
+    }, [data, isError, isFetching]);
 
     return (
         <div className='msteams-home'>
