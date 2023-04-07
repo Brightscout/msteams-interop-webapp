@@ -11,18 +11,16 @@ import {useLazyGetConnectedChannelsQuery} from '../../services';
 const ConnectPage = () => {
     const dispatch = useReduxDispatch();
 
-    const [getConnectedChannels, {isLoading, isSuccess, isFetching}] = useLazyGetConnectedChannelsQuery();
+    const [getConnectedChannels, {isSuccess, isFetching}] = useLazyGetConnectedChannelsQuery();
 
     useEffect(() => {
-        if (isSuccess && !(isLoading || isFetching)) {
+        if (isSuccess && !isFetching) {
             dispatch(setConnected(true));
         }
-    }, [isSuccess, isLoading, isFetching]);
+    }, [isSuccess, isFetching]);
 
-    if (isLoading || isFetching) {
-        return (
-            <LoadingPage/>
-        );
+    if (isFetching) {
+        return <LoadingPage/>;
     }
 
     return (
