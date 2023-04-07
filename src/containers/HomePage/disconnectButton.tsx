@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {memo, useEffect} from 'react';
 
 import {Button} from '@fluentui/react-northstar';
 
@@ -7,7 +7,7 @@ import {useLazyDisconnectUserQuery} from '../../services';
 import {useReduxDispatch} from '../../hooks';
 import {setConnected} from '../../reducers/connectedState';
 
-const DisconnectButton = () => {
+export function DisconnectButton() {
     const dispatch = useReduxDispatch();
 
     // Services
@@ -27,6 +27,6 @@ const DisconnectButton = () => {
             />
         </div>
     );
-};
+}
 
-export default DisconnectButton;
+export const MemoizedDisconnectButton = memo(DisconnectButton);
