@@ -1,5 +1,7 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 
+import {ConnectedChannelData} from '../types';
+
 import {ENV_VARIABLES} from '../constants';
 
 /**
@@ -18,7 +20,7 @@ const baseApi = createApi({
             return headers;
         },
     }),
-    tagTypes: [],
+    tagTypes: ['ChannelConnect'],
     endpoints: (builder) => ({
         connectChannel: builder.mutation<void, ConnectChannelPayload>({
             query: (body) => ({
@@ -26,9 +28,17 @@ const baseApi = createApi({
                 method: 'POST',
                 body,
             }),
+            invalidatesTags: ['ChannelConnect'],
+        }),
+        getConnectedChannels: builder.query<ConnectedChannelData[], void>({
+            query: () => ({
+                url: '/channels',
+                method: 'GET',
+            }),
+            providesTags: ['ChannelConnect'],
         }),
     }),
 });
 
-export const {useConnectChannelMutation} = baseApi;
+export const {useConnectChannelMutation, useGetConnectedChannelsQuery} = baseApi;
 export default baseApi;

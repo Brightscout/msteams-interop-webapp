@@ -9,3 +9,21 @@ export const ConnectFormFields = {
 };
 
 export type ConnectFormFieldsType = typeof ConnectFormFields[keyof typeof ConnectFormFields]
+
+export type ConnectedChannelData = {
+    SubscriptionID: string,
+    ClientState: string,
+    TeamsTeamID: string,
+    TeamsTeamName: string,
+    TeamsChannelID: string,
+    TeamsChannelName: string,
+    MMTeamName: string,
+    MMChannelID: string,
+    MMChannelName: string,
+    MMUserID: string,
+}
+
+export type ConnectedChannelTableData = {
+    key: number;
+    items: ({content: string | JSX.Element})[];
+}

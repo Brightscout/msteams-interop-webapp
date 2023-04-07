@@ -78,7 +78,7 @@ const InputPanel = () => {
     };
 
     const successPanel = () => (
-        <div className='msteams-panel d-flex flex-column'>
+        <div className='d-flex flex-column'>
             <div className='margin-auto margin-bottom-10'>
                 {SVGIcons.success}
             </div>
@@ -89,7 +89,7 @@ const InputPanel = () => {
     );
 
     const errorPanel = () => (
-        <div className='msteams-panel d-flex flex-column'>
+        <div className='d-flex flex-column'>
             <div className='margin-auto margin-bottom-10'>
                 {SVGIcons.error}
             </div>

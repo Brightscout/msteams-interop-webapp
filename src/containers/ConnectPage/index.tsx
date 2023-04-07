@@ -22,7 +22,7 @@ const ConnectPage = () => {
             <Button
                 primary={true}
                 content='Already connected? Go to home'
-                className='msteams-connect__home-button'
+                className='margin-left-25'
             />
         </div>
     );
