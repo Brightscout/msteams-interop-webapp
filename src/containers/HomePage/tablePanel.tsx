@@ -4,9 +4,10 @@ import {FetchBaseQueryError} from '@reduxjs/toolkit/dist/query';
 import {Button, Dialog, Loader, Table} from '@fluentui/react-northstar';
 
 import ResultPanel from '../../components/resultPanel';
-import {GenericError} from '../../constants';
+import {ERROR} from '../../constants';
 import SVGIcons from '../../constants/icons';
 import {useDisconnectChannelMutation, useGetConnectedChannelsQuery} from '../../services';
+import {APIError, ConnectedChannelTableData} from '../../types';
 
 const TablePanel = () => {
     // States
@@ -20,7 +21,7 @@ const TablePanel = () => {
     };
 
     // Services
-    const {isLoading, data, isError, error, isFetching} = useGetConnectedChannelsQuery();
+    const {data, isError, error, isFetching} = useGetConnectedChannelsQuery();
     const [disconnectChannel, {
         isError: disconnectChannelIsError,
         isSuccess: disconnectChannelIsSuccess,
@@ -37,11 +38,11 @@ const TablePanel = () => {
             return ((error as FetchBaseQueryError).data as APIError | undefined)?.message;
         }
 
-        if (isLoading || isFetching) {
+        if (isFetching) {
             return (
                 <Loader
                     inline={true}
-                    className='msteams-home__table-loader'
+                    className='margin-left-140'
                 />
             );
         }
@@ -50,17 +51,14 @@ const TablePanel = () => {
     };
 
     useEffect(() => {
-        if (isError || isLoading || isFetching || !data?.length) {
+        if (isError || isFetching || !data?.length) {
             setRowsData([{
                 key: 0,
                 items: [
-                    {content: <div className='msteams-home__table-no-content'>{getEmptyTableContent()}</div>},
+                    {content: <div className='msteams-home__table-no-content margin-left-300'>{getEmptyTableContent()}</div>},
                 ],
             }]);
-            return;
-        }
-
-        if (data) {
+        } else if (data) {
             const rows: ConnectedChannelTableData[] = [];
             data.map((row, index) => {
                 rows.push({
@@ -84,7 +82,7 @@ const TablePanel = () => {
                                     {disconnectChannelIsLoading && subsriptionDeletedId === row.subscriptionId && (
                                         <Loader
                                             inline={true}
-                                            className='msteams-home__disconnect-loader'
+                                            className='margin-left-15'
                                         />
                                     )}
                                 </>
@@ -97,7 +95,7 @@ const TablePanel = () => {
 
             setRowsData(rows);
         }
-    }, [data, isLoading, isError, isFetching, disconnectChannelIsLoading]);
+    }, [data, isError, isFetching, disconnectChannelIsLoading]);
 
     useEffect(() => {
         if (disconnectChannelIsSuccess || disconnectChannelIsError) {
@@ -108,8 +106,8 @@ const TablePanel = () => {
 
     return (
         <div className='msteams-home'>
-            <div className='msteams-home__table'>
-                <div className='msteams-home__table-title'>{'Connected Channel List'}</div>
+            <div className='msteams-home__table margin-top-70'>
+                <div className='msteams-home__table-title margin-left-10 margin-bottom-20'>{'Connected Channel List'}</div>
                 <Table
                     header={header}
                     rows={rowsData}
@@ -119,7 +117,7 @@ const TablePanel = () => {
                 <Dialog
                     content={
                         <ResultPanel
-                            message={disconnectChannelIsSuccess ? 'Channel Disconnected Successfully' : ((disconnectChannelError as FetchBaseQueryError).data as APIError | undefined)?.message ?? GenericError}
+                            message={disconnectChannelIsSuccess ? 'Channel Disconnected Successfully' : ((disconnectChannelError as FetchBaseQueryError).data as APIError | undefined)?.message ?? ERROR.GENERIC_ERROR}
                             icon={disconnectChannelIsSuccess ? SVGIcons.success : SVGIcons.error}
                         />
                     }

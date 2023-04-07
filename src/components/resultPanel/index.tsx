@@ -6,11 +6,11 @@ type ResultPanelProps = {
 }
 
 const ResultPanel = ({message, icon}: ResultPanelProps) => (
-    <div className='msteams-panel'>
-        <div className='msteams-panel__icon'>
+    <div className='d-flex flex-column'>
+        <div className='margin-auto margin-bottom-10'>
             {icon}
         </div>
-        <div className='msteams-panel__text'>
+        <div className='margin-auto margin-top-10'>
             {message}
         </div>
     </div>
