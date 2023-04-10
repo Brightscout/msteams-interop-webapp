@@ -1,7 +1,5 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 
-import {PLUGIN_ID} from '../constants';
-
 import utils from '../utils';
 
 /**
@@ -12,7 +10,7 @@ import utils from '../utils';
 const baseApi = createApi({
     reducerPath: 'baseApiReducer',
     baseQuery: fetchBaseQuery({
-        baseUrl: `${utils.getBaseUrl()}/plugins/${PLUGIN_ID}/api/v1/teams`,
+        baseUrl: `${utils.getBaseUrls().plugin}`,
         prepareHeaders: (headers) => {
             // We can modify the headers here
             return headers;

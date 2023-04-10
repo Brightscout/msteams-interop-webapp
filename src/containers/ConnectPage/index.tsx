@@ -3,7 +3,7 @@ import React, {useEffect} from 'react';
 import {Button} from '@fluentui/react-northstar';
 
 import LoadingPage from '../../components/loadingPage';
-import {CONNECT_ACCOUNT_LINK, PLUGIN_ID} from '../../constants';
+import {CONNECT_ACCOUNT_LINK} from '../../constants';
 import {useReduxDispatch} from '../../hooks';
 import {setConnected} from '../../reducers/connectedState';
 import {useLazyGetConnectedChannelsQuery} from '../../services';
@@ -37,7 +37,7 @@ const ConnectPage = () => {
             <div className='msteams-connect__title'>{'Connect your account'}</div>
             <div className='msteams-connect__description'>{'Authorize your Microsoft Teams account and broadcast your messages from Microsoft Teams to Mattermost.'}</div>
             <a
-                href={`${utils.getBaseUrl()}/plugins/${PLUGIN_ID}/api/v1/teams${CONNECT_ACCOUNT_LINK}`}
+                href={`${utils.getBaseUrls().plugin}${CONNECT_ACCOUNT_LINK}`}
                 target='_blank'
                 className='msteams-connect__button'
                 rel='noreferrer'
