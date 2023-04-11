@@ -13,7 +13,7 @@ const TablePanel = () => {
     // States
     const [rowsData, setRowsData] = useState<ConnectedChannelTableData[]>([]);
     const [showResultPanel, setShowResultPanel] = useState(false);
-    const [subsriptionDeletedId, setSubsriptionDeletedId] = useState('');
+    const [deletedSubsriptionId, setDeletedSubsriptionId] = useState('');
 
     // Table headers
     const header = {
@@ -23,13 +23,13 @@ const TablePanel = () => {
     // Services
     const {data, isError, error, isFetching} = useGetConnectedChannelsQuery();
     const [disconnectChannel, {
-        isError: disconnectChannelIsError,
-        isSuccess: disconnectChannelIsSuccess,
-        isLoading: disconnectChannelIsLoading,
+        isError: isDisconnectChannelError,
+        isSuccess: isDisconnectChannelSuccess,
+        isLoading: isDisconnectChannelLoading,
         error: disconnectChannelError}] = useDisconnectChannelMutation();
 
     const handleDisconnectButton = (subscriptionId: string) => {
-        setSubsriptionDeletedId(subscriptionId);
+        setDeletedSubsriptionId(subscriptionId);
         disconnectChannel({subscriptionId});
     };
 
@@ -77,9 +77,9 @@ const TablePanel = () => {
                                         secondary={true}
                                         content='Disconnect'
                                         onClick={() => handleDisconnectButton(row.subscriptionId)}
-                                        disabled={disconnectChannelIsLoading && subsriptionDeletedId === row.subscriptionId}
+                                        disabled={isDisconnectChannelLoading && deletedSubsriptionId === row.subscriptionId}
                                     />
-                                    {disconnectChannelIsLoading && subsriptionDeletedId === row.subscriptionId && (
+                                    {isDisconnectChannelLoading && deletedSubsriptionId === row.subscriptionId && (
                                         <Loader
                                             inline={true}
                                             className='margin-left-15'
@@ -95,14 +95,14 @@ const TablePanel = () => {
 
             setRowsData(rows);
         }
-    }, [data, isError, isFetching, disconnectChannelIsLoading]);
+    }, [data, isError, isFetching, isDisconnectChannelLoading]);
 
     useEffect(() => {
-        if (disconnectChannelIsSuccess || disconnectChannelIsError) {
-            setSubsriptionDeletedId('');
+        if (isDisconnectChannelSuccess || isDisconnectChannelError) {
+            setDeletedSubsriptionId('');
             setShowResultPanel(true);
         }
-    }, [disconnectChannelIsSuccess, disconnectChannelIsError]);
+    }, [isDisconnectChannelSuccess, isDisconnectChannelError]);
 
     return (
         <div className='msteams-home'>
@@ -117,13 +117,13 @@ const TablePanel = () => {
                 <Dialog
                     content={
                         <ResultPanel
-                            message={disconnectChannelIsSuccess ? 'Channel Disconnected Successfully' : ((disconnectChannelError as FetchBaseQueryError).data as APIError | undefined)?.message ?? ERROR.GENERIC_ERROR}
-                            icon={disconnectChannelIsSuccess ? SVGIcons.success : SVGIcons.error}
+                            message={isDisconnectChannelSuccess ? 'Channel Disconnected Successfully' : ((disconnectChannelError as FetchBaseQueryError).data as APIError | undefined)?.message ?? ERROR.GENERIC_ERROR}
+                            icon={isDisconnectChannelSuccess ? SVGIcons.success : SVGIcons.error}
                         />
                     }
                     cancelButton='Close'
                     onCancel={() => setShowResultPanel(false)}
-                    confirmButton={disconnectChannelIsError && 'Try Again'}
+                    confirmButton={isDisconnectChannelError && 'Try Again'}
                     onConfirm={() => setShowResultPanel(false)}
                     backdrop={true}
                     open={showResultPanel}
