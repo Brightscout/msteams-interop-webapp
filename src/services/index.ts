@@ -1,6 +1,7 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 
 import utils from '../utils';
+import {ConnectedChannelData} from '../types';
 
 /**
  * Base API service to be used across the application.
