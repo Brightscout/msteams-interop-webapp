@@ -1,8 +1,7 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 
+import utils from '../utils';
 import {ConnectedChannelData} from '../types';
-
-import {ENV_VARIABLES} from '../constants';
 
 /**
  * Base API service to be used across the application.
@@ -12,13 +11,12 @@ import {ENV_VARIABLES} from '../constants';
 const baseApi = createApi({
     reducerPath: 'baseApiReducer',
     baseQuery: fetchBaseQuery({
-
-        // TODO: change the Url later
-        baseUrl: `https://e3c2-2405-201-402b-6c0f-9136-66-e463-7ab5.in.ngrok.io/plugins/${ENV_VARIABLES.PLUGIN_ID}/api/v1/teams`,
+        baseUrl: `${utils.getBaseUrls().plugin}`,
         prepareHeaders: (headers) => {
             // We can modify the headers here
             return headers;
         },
+        timeout: 30000,
     }),
     tagTypes: ['ChannelConnect'],
     endpoints: (builder) => ({
@@ -43,6 +41,14 @@ const baseApi = createApi({
                 method: 'GET',
             }),
         }),
+        disconnectChannel: builder.mutation<void, DisconnectChannelPayload>({
+            query: (body) => ({
+                url: '/channels/disconnect',
+                method: 'POST',
+                body,
+            }),
+            invalidatesTags: ['ChannelConnect'],
+        }),
     }),
 });
 
@@ -51,5 +57,6 @@ export const {
     useGetConnectedChannelsQuery,
     useLazyGetConnectedChannelsQuery,
     useLazyDisconnectUserQuery,
+    useDisconnectChannelMutation,
 } = baseApi;
 export default baseApi;

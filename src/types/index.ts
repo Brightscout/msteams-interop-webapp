@@ -11,16 +11,16 @@ export const ConnectFormFields = {
 export type ConnectFormFieldsType = typeof ConnectFormFields[keyof typeof ConnectFormFields]
 
 export type ConnectedChannelData = {
-    SubscriptionID: string,
-    ClientState: string,
-    TeamsTeamID: string,
-    TeamsTeamName: string,
-    TeamsChannelID: string,
-    TeamsChannelName: string,
-    MMTeamName: string,
-    MMChannelID: string,
-    MMChannelName: string,
-    MMUserID: string,
+    subscriptionId: string,
+    clientState: string,
+    teamsTeamId: string,
+    teamsTeamName: string,
+    teamsChannelId: string,
+    teamsChannelName: string,
+    mmTeamName: string,
+    mmChannelId: string,
+    mmChannelName: string,
+    mmUserId: string,
 }
 
 export type ConnectedChannelTableData = {

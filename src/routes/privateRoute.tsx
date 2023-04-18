@@ -28,7 +28,10 @@ const PrivateRoute = () => {
 
     if (isLoading) {
         return (
-            <LoadingPage/>
+            <LoadingPage
+                label='Loading...'
+                inline={true}
+            />
         );
     }
 

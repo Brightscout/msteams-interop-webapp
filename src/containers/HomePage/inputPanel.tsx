@@ -1,8 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {FetchBaseQueryError} from '@reduxjs/toolkit/dist/query';
 
-import {Button, Dialog, Input, Loader} from '@fluentui/react-northstar';
+import {Button, Dialog, Input} from '@fluentui/react-northstar';
 
+import LoadingPage from '../../components/loadingPage';
+import ResultPanel from '../../components/resultPanel';
+import {ERROR} from '../../constants';
 import SVGIcons from '../../constants/icons';
 import {useConnectChannelMutation} from '../../services';
 
@@ -77,28 +80,6 @@ const InputPanel = () => {
         }
     };
 
-    const successPanel = () => (
-        <div className='d-flex flex-column'>
-            <div className='margin-auto margin-bottom-10'>
-                {SVGIcons.success}
-            </div>
-            <div className='margin-auto margin-top-10'>
-                {'Channel connected successfully'}
-            </div>
-        </div>
-    );
-
-    const errorPanel = () => (
-        <div className='d-flex flex-column'>
-            <div className='margin-auto margin-bottom-10'>
-                {SVGIcons.error}
-            </div>
-            <div className='margin-auto margin-top-10'>
-                {((error as FetchBaseQueryError).data as APIError | undefined)?.message}
-            </div>
-        </div>
-    );
-
     useEffect(() => {
         if (isSuccess || isError) {
             setShowResultPanel(true);
@@ -112,37 +93,40 @@ const InputPanel = () => {
                 <Input
                     placeholder={connectForm.teamsChannelUrl.placeholder}
                     label={connectForm.teamsChannelUrl.label}
-                    className='margin-right-15'
+                    className='msteams-home__input-component margin-right-15'
                     required={connectForm.teamsChannelUrl.isRequired}
                     error={connectForm.teamsChannelUrl.error as boolean}
                     onChange={handleTeamsChannelUrlChange}
-                    disabled={isLoading}
                 />
                 <Input
                     placeholder={connectForm.mattermostChannelURL.placeholder}
                     label={connectForm.mattermostChannelURL.label}
-                    className='margin-right-15'
+                    className='msteams-home__input-component margin-right-15'
                     required={connectForm.mattermostChannelURL.isRequired}
                     error={connectForm.mattermostChannelURL.error as boolean}
                     onChange={handleMattermostChannelUrlChange}
-                    disabled={isLoading}
                 />
                 <Button
                     primary={true}
                     content='Connect a channel'
-                    className='margin-top-20 margin-left-190'
+                    className='margin-top-20 margin-left-20'
                     onClick={handleChannelConnect}
-                    disabled={isLoading}
                 />
                 {isLoading && (
-                    <Loader
+                    <LoadingPage
                         label='Connecting...'
                         inline={true}
+                        className='msteams-loading-page__transparent-loader'
                     />
                 )}
                 {showResultPanel && (
                     <Dialog
-                        content={isSuccess ? successPanel() : errorPanel()}
+                        content={
+                            <ResultPanel
+                                message={isSuccess ? 'Channel Connected Successfully' : ((error as FetchBaseQueryError).data as APIError | undefined)?.message ?? ERROR.GENERIC_ERROR}
+                                icon={isSuccess ? SVGIcons.success : SVGIcons.error}
+                            />
+                        }
                         cancelButton='Close'
                         onCancel={() => setShowResultPanel(false)}
                         confirmButton={isError && 'Try Again'}
