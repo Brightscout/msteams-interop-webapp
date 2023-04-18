@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {FetchBaseQueryError} from '@reduxjs/toolkit/dist/query';
 
-import {Button, Dialog, Input, Loader} from '@fluentui/react-northstar';
+import {Button, Dialog, Input} from '@fluentui/react-northstar';
 
+import LoadingPage from '../../components/loadingPage';
 import ResultPanel from '../../components/resultPanel';
 import {ERROR} from '../../constants';
 import SVGIcons from '../../constants/icons';
@@ -92,32 +93,30 @@ const InputPanel = () => {
                 <Input
                     placeholder={connectForm.teamsChannelUrl.placeholder}
                     label={connectForm.teamsChannelUrl.label}
-                    className='margin-right-15'
+                    className='msteams-home__input-component margin-right-15'
                     required={connectForm.teamsChannelUrl.isRequired}
                     error={connectForm.teamsChannelUrl.error as boolean}
                     onChange={handleTeamsChannelUrlChange}
-                    disabled={isLoading}
                 />
                 <Input
                     placeholder={connectForm.mattermostChannelURL.placeholder}
                     label={connectForm.mattermostChannelURL.label}
-                    className='margin-right-15'
+                    className='msteams-home__input-component margin-right-15'
                     required={connectForm.mattermostChannelURL.isRequired}
                     error={connectForm.mattermostChannelURL.error as boolean}
                     onChange={handleMattermostChannelUrlChange}
-                    disabled={isLoading}
                 />
                 <Button
                     primary={true}
                     content='Connect a channel'
-                    className='margin-top-20 margin-left-190'
+                    className='margin-top-20 margin-left-20'
                     onClick={handleChannelConnect}
-                    disabled={isLoading}
                 />
                 {isLoading && (
-                    <Loader
+                    <LoadingPage
                         label='Connecting...'
                         inline={true}
+                        className='msteams-loading-page__transparent-loader'
                     />
                 )}
                 {showResultPanel && (

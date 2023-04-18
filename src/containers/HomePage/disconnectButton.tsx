@@ -20,7 +20,7 @@ export function DisconnectButton() {
     }, [isSuccess]);
 
     return (
-        <div className='msteams-disconnect'>
+        <div className='msteams-home__disconnect-button'>
             <Button
                 content='Disconnect'
                 onClick={() => disconnectUser()}

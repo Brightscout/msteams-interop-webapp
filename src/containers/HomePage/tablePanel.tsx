@@ -3,6 +3,7 @@ import {FetchBaseQueryError} from '@reduxjs/toolkit/dist/query';
 
 import {Button, Dialog, Loader, Table} from '@fluentui/react-northstar';
 
+import LoadingPage from '../../components/loadingPage';
 import ResultPanel from '../../components/resultPanel';
 import {ERROR} from '../../constants';
 import SVGIcons from '../../constants/icons';
@@ -127,6 +128,13 @@ const TablePanel = () => {
                     onConfirm={() => setShowResultPanel(false)}
                     backdrop={true}
                     open={showResultPanel}
+                />
+            )}
+            {isDisconnectChannelLoading && (
+                <LoadingPage
+                    label='Disconnecting...'
+                    inline={true}
+                    className='msteams-loading-page__transparent-loader'
                 />
             )}
         </div>
