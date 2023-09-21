@@ -2,13 +2,11 @@ import {combineReducers} from '@reduxjs/toolkit';
 
 import baseApi from '../services';
 
-import testReducer from './testReducer';
+import connectedReducer from './connectedState';
 
 // Add all reducers here
 const reducer = combineReducers({
-
-    // TODO: remove later
-    testReducer,
+    connectedReducer,
     [baseApi.reducerPath]: baseApi.reducer,
 });
 

@@ -1,0 +1,53 @@
+.msteams-home {
+    &__title {
+        height: 28px;
+        font-weight: 600;
+        font-size: 30px;
+        line-height: 28px;
+    }
+
+    &__input-component {
+        .ui-box {
+            width: 345px;
+        }
+
+        .ui-icon {
+            margin-left: 325px;
+        }
+    }
+    
+    &__table {
+        width: 900px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.14), 0 0 2px rgba(0, 0, 0, 0.12);
+        border-radius: 4px;
+    }
+
+    &__table-title {
+        font-weight: 600;
+        font-size: 16px;
+        width: 178px;
+        height: 21px;
+        padding-top: 15px;
+    }
+
+    &__table-no-content {
+        font-weight: 700;
+        font-size: 20px;
+    }
+
+    &__disconnect-button {
+        display: flex;
+        justify-content: end;
+        padding-top: 30px;
+        padding-right: 30px;
+
+        .ui-button {
+            border-color: rgb(255, 148, 148);
+        }
+
+        .ui-button:hover {
+            background-color: rgb(255, 255, 255);
+            border-color: rgb(190, 0, 0);
+        }
+    }
+}
